@@ -25,7 +25,7 @@ public class Player {
 				return i;
 			}
 		}
-		throw CommodityNotFoundException;
+		throw new CommodityNotFoundException("The stock requested for does not exist in the database, sorry :-(");
 	}
 
 	public Player(String name, long initialBalance) {
