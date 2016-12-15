@@ -1,5 +1,7 @@
 package dataclasses;
 
+import exceptions.IllegalSellingException;
+
 /**
  *
  * @author Rajat
@@ -18,6 +20,14 @@ public class Commodity {
     
     public void addQuantity(int i) {
         quantity+=i;
+    }
+    
+    public void removeQuantity(int i) throws IllegalSellingException {
+        if(quantity>=i) {
+            quantity-=i;
+        } else {
+            throw new IllegalSellingException("You can't sell more than what you've bought");
+        }
     }
 
     public Commodity(Stock stock) {
