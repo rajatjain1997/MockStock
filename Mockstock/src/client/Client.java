@@ -62,7 +62,6 @@ public class Client {
     
     public static void main(String args[]) {
         client = new Client("127.0.0.1");
-        System.out.println(client.readPlayer(1).getName());
     }
     
     public class RemoteReader implements Runnable {

@@ -1,12 +1,13 @@
 package dataclasses;
 
 import exceptions.IllegalSellingException;
+import java.io.*;
 
 /**
  *
  * @author Rajat
  */
-public class Commodity {
+public class Commodity implements Serializable{
     private Stock stock;
     private int quantity;
 

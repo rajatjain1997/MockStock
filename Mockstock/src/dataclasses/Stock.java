@@ -1,8 +1,9 @@
 package dataclasses;
 
 import java.util.*;
+import java.io.*;
 
-public class Stock{
+public class Stock implements Serializable{
 	private String name;
 	private ArrayList<Long> prices;
 

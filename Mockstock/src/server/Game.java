@@ -17,12 +17,13 @@ import java.io.*;
 public class Game {
     private static final ArrayList<Player> players = new ArrayList<>();
     private static final ArrayList<Stock> stocks = new ArrayList<>();
+    private static final ArrayList<Boolean> playerLocks = new ArrayList<>();
     private static long initialBalance;
     private static int noOfBrokers=0;
     
-    public static void registerPlayer(Player player) {
-        players.add(player);
-        System.out.println("Added "+ player.getName());
+    public static void registerPlayer(String name) {
+        players.add(new Player(name));
+        System.out.println("Added "+ name);
     }
     
     public static void readStocks() {
@@ -37,6 +38,8 @@ public class Game {
                 st = new StringTokenizer(line,",");
                 prices = new ArrayList<>();
                 name = st.nextToken();
+                char[] replacer = {(char)65279};
+                name = name.replace(new String(replacer), "");
                 while(st.hasMoreTokens()) {
                     prices.add(Long.parseLong(st.nextToken()));
                 }

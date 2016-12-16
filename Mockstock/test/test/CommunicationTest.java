@@ -14,8 +14,7 @@ import server.Game;
  */
 public class CommunicationTest {
     public static void main(String args[]) {
-        Player player = new Player("Rajat");
-        Game.registerPlayer(player);
+        Game.registerPlayer("Rajat");
     }
     
 }

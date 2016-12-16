@@ -1,10 +1,10 @@
 package dataclasses;
 
-import client.Broker;
 import java.util.*;
 import java.io.*;
 import exceptions.CommodityNotFoundException;
 import exceptions.IllegalBuyingException;
+import server.Game;
 
 public class Player implements Serializable{
 	private final String name;
@@ -27,7 +27,14 @@ public class Player implements Serializable{
 
 	public Commodity getCommodity(String stockName) throws CommodityNotFoundException{
 		for(Commodity i:portfolio) {
-			if(i.getStock().getName().equals(stockName)) {
+                    System.out.println(i.getStock().getName().trim().equalsIgnoreCase(stockName.trim()));
+                    System.out.println(i.getStock().getName());
+                    System.out.println(stockName);
+                    char[] chr= i.getStock().getName().toCharArray();
+                    for(char j:chr) {
+                        System.out.println((int)j);
+                    }
+			if(i.getStock().getName().trim().equalsIgnoreCase(stockName)) {
 				return i;
 			}
 		}
@@ -41,16 +48,14 @@ public class Player implements Serializable{
                 throw new IllegalBuyingException("You can't sell if you don't have the money.");
             }
         }
-        
-        //Change TeamID mechanism and shift it to server
 
 	public Player(String name) {
 		this.name = name;
 		numberOfTeams++;
 		teamID=numberOfTeams;
-		currentBalance = Broker.getInitialBalance();
+		currentBalance = Game.getInitialBalance();
 		portfolio= new ArrayList<>();
-		for (Stock i: Broker.getStocks()) {
+		for (Stock i: Game.getStocks()) {
 			portfolio.add(new Commodity(i));
 		}
         }
