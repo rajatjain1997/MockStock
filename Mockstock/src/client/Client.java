@@ -85,6 +85,15 @@ public class Client {
         }
     }
     
+    private void registerPlayer(String name) {
+        String message = "Register,"+name;
+        try {
+            out.writeObject(message);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public static void main(String args[]) {
         client = new Client("127.0.0.1");
         Player p = null;

@@ -82,6 +82,8 @@ public class Server {
                             }
                         } else if(token.equals("Round")) {
                             clientOutputStreams.get(brokerName-1).writeObject(Game.getCurrentRound());
+                        } else if(token.equals("Register")) {
+                            Game.registerPlayer(st.nextToken());
                         }
                     } else if(obj.getClass()==Player.class) {
                         Game.setPlayer((Player)obj);
