@@ -43,7 +43,6 @@ public class Server {
     
     public static void main(String args[]) {
         Game.readStocks();
-        Game.registerPlayer("Rajat");
         server = new Server();
     }
 

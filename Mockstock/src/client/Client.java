@@ -40,7 +40,7 @@ public class Client {
         }
     }
     
-    private Player readPlayer(int teamNo) throws PlayerLockedException{
+    public Player readPlayer(int teamNo) throws PlayerLockedException{
         Player player=null;
         String message="Player," + teamNo;
         String wait = "Waiting for Player";
@@ -61,7 +61,7 @@ public class Client {
         return player;
     }
     
-    private int readRoundNo() {
+    public int readRoundNo() {
         int roundNo = 0;
         String message="Round";
         String wait = "Waiting for Round Info";
@@ -77,7 +77,7 @@ public class Client {
         return roundNo;
     }
     
-    private void writePlayer(Player player) {
+    public void writePlayer(Player player) {
         try {
             out.writeObject(player);
         } catch(IOException e) {
@@ -85,7 +85,7 @@ public class Client {
         }
     }
     
-    private void registerPlayer(String name) {
+    public void registerPlayer(String name) {
         String message = "Register,"+name;
         try {
             out.writeObject(message);
@@ -96,6 +96,7 @@ public class Client {
     
     public static void main(String args[]) {
         client = new Client("127.0.0.1");
+        client.registerPlayer("Rajat");
         Player p = null;
         try {
             p = client.readPlayer(1);
