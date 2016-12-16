@@ -2,10 +2,11 @@ package dataclasses;
 
 import client.Broker;
 import java.util.*;
+import java.io.*;
 import exceptions.CommodityNotFoundException;
 import exceptions.IllegalBuyingException;
 
-public class Player {
+public class Player implements Serializable{
 	private final String name;
 	private final int teamID;
 	private long currentBalance;
@@ -41,13 +42,13 @@ public class Player {
             }
         }
         
-        
+        //Change TeamID mechanism and shift it to server
 
-	public Player(String name, long initialBalance) {
+	public Player(String name) {
 		this.name = name;
 		numberOfTeams++;
 		teamID=numberOfTeams;
-		currentBalance = initialBalance;
+		currentBalance = Broker.getInitialBalance();
 		portfolio= new ArrayList<>();
 		for (Stock i: Broker.getStocks()) {
 			portfolio.add(new Commodity(i));

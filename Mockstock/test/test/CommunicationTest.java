@@ -5,15 +5,17 @@
  */
 package test;
 
-import dataclasses.*;
+import dataclasses.Player;
+import server.Game;
 
 /**
  *
  * @author Rajat
  */
-public class DataTester {
-    public static void main(String[] args) {
-        Player p = new Player("Rajat");
-        System.out.println(p.getName());
+public class CommunicationTest {
+    public static void main(String args[]) {
+        Player player = new Player("Rajat");
+        Game.registerPlayer(player);
     }
+    
 }

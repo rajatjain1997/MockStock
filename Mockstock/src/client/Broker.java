@@ -16,7 +16,6 @@ import java.io.*;
 public class Broker {
     private static final ArrayList<Stock> stocks = new ArrayList<>();
     private static long initialBalance;
-    private static int brokerName;
 
     public static ArrayList<Stock> getStocks() {
         return stocks;
@@ -28,14 +27,6 @@ public class Broker {
 
     public static void setInitialBalance(long initialBalance) {
         Broker.initialBalance = initialBalance;
-    }
-
-    public static int getBrokerName() {
-        return brokerName;
-    }
-
-    public static void setBrokerName(int brokerName) {
-        Broker.brokerName = brokerName;
     }
     
     
