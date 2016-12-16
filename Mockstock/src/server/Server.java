@@ -6,6 +6,7 @@
 package server;
 
 import dataclasses.Player;
+import exceptions.PlayerLockedException;
 import java.util.*;
 import java.net.*;
 import java.io.*;
@@ -42,6 +43,7 @@ public class Server {
     
     public static void main(String args[]) {
         Game.readStocks();
+        Game.registerPlayer("Rajat");
         server = new Server();
     }
 
@@ -64,15 +66,28 @@ public class Server {
         
         @Override
         public void run() {
-            String message;
+            Object obj;
             try {
-                while((message=(String)in.readObject())!=null) {
-                    StringTokenizer st = new StringTokenizer(message, ",");
-                    if(st.nextToken().equals("Player")) {
-                        clientOutputStreams.get(brokerName-1).writeObject(Game.getPlayer(Integer.parseInt(st.nextToken())));
+                while((obj=in.readObject())!=null) {
+                    if(obj.getClass()==String.class) {
+                        String message = (String)obj;
+                        StringTokenizer st = new StringTokenizer(message, ",");
+                        String token = st.nextToken();
+                        if(token.equals("Player")) {
+                            try {
+                                clientOutputStreams.get(brokerName-1).writeObject(Game.getPlayer(Integer.parseInt(st.nextToken())));
+                            } catch(PlayerLockedException e) {
+                                clientOutputStreams.get(brokerName-1).writeObject("Error 001 - Player is locked");
+                                System.out.println(e.getMessage());
+                            }
+                        } else if(token.equals("Round")) {
+                            clientOutputStreams.get(brokerName-1).writeObject(Game.getCurrentRound());
+                        }
+                    } else if(obj.getClass()==Player.class) {
+                        Game.setPlayer((Player)obj);
                     }
                 }
-            } catch(Exception e) {
+            } catch(IOException | ClassNotFoundException | NumberFormatException e) {
                 e.printStackTrace();
             }
         }

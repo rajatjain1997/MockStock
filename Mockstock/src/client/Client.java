@@ -6,8 +6,11 @@
 package client;
 
 import dataclasses.Player;
+import exceptions.PlayerLockedException;
 import java.net.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,6 +22,7 @@ public class Client {
     private static ObjectInputStream in;
     private static Client client;
     private Player currentPlayer = null;
+    private int currentRound = 0;
     
     private Client(String address) {
         initializeServerConnection(address);
@@ -36,7 +40,7 @@ public class Client {
         }
     }
     
-    private Player readPlayer(int teamNo) {
+    private Player readPlayer(int teamNo) throws PlayerLockedException{
         Player player=null;
         String message="Player," + teamNo;
         String wait = "Waiting for Player";
@@ -44,12 +48,33 @@ public class Client {
             synchronized(wait) {
                 out.writeObject(message);
                 wait.wait();
-                player = currentPlayer;
+                if(currentPlayer!=null) {
+                    player = currentPlayer;
+                    return player;
+                } else {
+                    throw new PlayerLockedException("Player is locked");
+                }
             }
         } catch(IOException | InterruptedException e) {
             e.printStackTrace();
         }
         return player;
+    }
+    
+    private int readRoundNo() {
+        int roundNo = 0;
+        String message="Round";
+        String wait = "Waiting for Round Info";
+        try{
+            synchronized(wait) {
+                out.writeObject(message);
+                wait.wait();
+                roundNo = currentRound;
+            }
+        } catch(IOException | InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        return roundNo;
     }
     
     private void writePlayer(Player player) {
@@ -62,6 +87,14 @@ public class Client {
     
     public static void main(String args[]) {
         client = new Client("127.0.0.1");
+        Player p = null;
+        try {
+            p = client.readPlayer(1);
+        } catch (PlayerLockedException ex) {
+            System.out.println(ex.getMessage());
+        }
+        client.writePlayer(p);
+        System.out.println(client.readRoundNo());
     }
     
     public class RemoteReader implements Runnable {
@@ -76,6 +109,18 @@ public class Client {
                         currentPlayer = (Player) obj;
                         synchronized("Waiting for Player") {
                             "Waiting for Player".notifyAll();
+                        }
+                    } else if(obj.getClass()==String.class) {
+                        if(((String)obj).equals("Error 001 - Player is locked")) {
+                            currentPlayer = null;
+                            synchronized("Waiting for Player") {
+                                "Waiting for Player".notifyAll();
+                            }
+                        }
+                    } else if(obj.getClass()==Integer.class) {
+                        currentRound = (Integer)obj;
+                        synchronized("Waiting for Round Info") {
+                            "Waiting for Round Info".notifyAll();
                         }
                     }
                 }

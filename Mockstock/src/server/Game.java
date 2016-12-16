@@ -7,6 +7,7 @@ package server;
 
 import dataclasses.Player;
 import dataclasses.Stock;
+import exceptions.PlayerLockedException;
 import java.util.*;
 import java.io.*;
 
@@ -20,9 +21,11 @@ public class Game {
     private static final ArrayList<Boolean> playerLocks = new ArrayList<>();
     private static long initialBalance;
     private static int noOfBrokers=0;
+    private static int currentRound=1;
     
     public static void registerPlayer(String name) {
         players.add(new Player(name));
+        playerLocks.add(false);
         System.out.println("Added "+ name);
     }
     
@@ -51,8 +54,16 @@ public class Game {
         }
     }
 
-    public static Player getPlayer(int teamNo) {
-        return players.get(teamNo-1);
+    public static Player getPlayer(int teamNo) throws PlayerLockedException {
+        if(!playerLocks.get(teamNo-1)) {
+            return players.get(teamNo-1);
+        }
+        throw new PlayerLockedException("The player is being accessed by another client");
+    }
+    
+    public static void setPlayer(Player player) {
+        players.set(player.getTeamID()-1, player);
+        playerLocks.set(player.getTeamID()-1, false);
     }
 
     public static ArrayList<Stock> getStocks() {
@@ -74,6 +85,15 @@ public class Game {
     public static void setNoOfBrokers(int noOfBrokers) {
         Game.noOfBrokers = noOfBrokers;
     }
+
+    public static int getCurrentRound() {
+        return currentRound;
+    }
+
+    public static void setCurrentRound(int currentRound) {
+        Game.currentRound = currentRound;
+    }
+    
     
     
 }
