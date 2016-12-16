@@ -1,7 +1,9 @@
 package dataclasses;
 
+import client.Broker;
 import java.util.*;
 import exceptions.CommodityNotFoundException;
+import exceptions.IllegalBuyingException;
 
 public class Player {
 	private final String name;
@@ -31,8 +33,12 @@ public class Player {
 		throw new CommodityNotFoundException("The stock requested for does not exist in the database, sorry :-(");
 	}
 
-        public void setCurrentBalance(long currentBalance) {
-            this.currentBalance = currentBalance;
+        public void setCurrentBalance(long currentBalance) throws IllegalBuyingException {
+            if(currentBalance>=0) {
+                this.currentBalance = currentBalance;
+            } else {
+                throw new IllegalBuyingException("You can't sell if you don't have the money.");
+            }
         }
         
         

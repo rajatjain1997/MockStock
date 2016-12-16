@@ -4,18 +4,18 @@ import java.util.*;
 
 public class Stock{
 	private String name;
-	private ArrayList<Double> prices;
+	private ArrayList<Long> prices;
 
 	public String getName() {
 		return name;
 	}
 
-	public double getPrice(int roundNo) {
+	public long getPrice(int roundNo) {
 		return prices.get(roundNo-1);
 	}
 
-	public Stock(String name, ArrayList<Double> prices) {
+	public Stock(String name, ArrayList<Long> prices) {
 		this.name=name;
-		this.prices=(ArrayList<Double>)prices.clone();
+		this.prices=(ArrayList<Long>)prices.clone();
 	}
 }
