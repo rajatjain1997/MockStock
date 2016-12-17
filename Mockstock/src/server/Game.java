@@ -30,6 +30,7 @@ public class Game {
     }
     
     public static void readStocks() {
+        stocks.removeAll(stocks);
         File file = GUI.getFile();
         String line = "";
         String name;

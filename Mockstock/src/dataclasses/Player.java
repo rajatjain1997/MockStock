@@ -25,6 +25,12 @@ public class Player implements Serializable{
 		return currentBalance;
 	}
 
+        public static int getNumberOfTeams() {
+            return numberOfTeams;
+        }
+        
+        
+
 	public Commodity getCommodity(String stockName) throws CommodityNotFoundException{
 		for(Commodity i:portfolio) {
                     System.out.println(i.getStock().getName().trim().equalsIgnoreCase(stockName.trim()));
