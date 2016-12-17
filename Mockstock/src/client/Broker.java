@@ -14,6 +14,18 @@ import java.io.*;
  * @author Rajat
  */
 public class Broker {
+    
+    private static ArrayList<Stock> stocks;
+
+    public static ArrayList<Stock> getStocks() {
+        return stocks;
+    }
+
+    public static void setStocks(ArrayList<Stock> stocks) {
+        Broker.stocks = stocks;
+    }
+    
+    
 
     public static void buyStock(Player player, Stock stock, int quantity, int roundNo) {
         try {

@@ -8,16 +8,13 @@ package server;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import server.listener.FileListener;
-import server.listener.PlusButtonListener;
-import server.listener.StatsListener;
-import server.listener.SubButtonListener;
+import server.listener.*;
 /**
  *
  * @author Rajat
  */
 public class GUI {
-    private static JFrame theFrame = new JFrame("Mockstock Server");
+    private static final JFrame theFrame = new JFrame("Mockstock Server");
     private static JTextArea leaderboardDisplay;
     private static JLabel currentRound;
     

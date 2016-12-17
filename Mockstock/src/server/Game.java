@@ -23,10 +23,11 @@ public class Game {
     private static int noOfBrokers=0;
     private static int currentRound=1;
     
-    public static void registerPlayer(String name) {
+    public static int registerPlayer(String name) {
         players.add(new Player(name));
         playerLocks.add(false);
         System.out.println("Added "+ name);
+        return Player.getNumberOfTeams();
     }
     
     public static void readStocks() {

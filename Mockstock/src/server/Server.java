@@ -82,7 +82,10 @@ public class Server {
                         } else if(token.equals("Round")) {
                             clientOutputStreams.get(brokerName-1).writeObject(Game.getCurrentRound());
                         } else if(token.equals("Register")) {
-                            Game.registerPlayer(st.nextToken());
+                            int teamNo = Game.registerPlayer(st.nextToken());
+                            clientOutputStreams.get(brokerName-1).writeObject("Team "+teamNo);
+                        } else if(token.equals("Stocks")) {
+                            clientOutputStreams.get(brokerName-1).writeObject(Game.getStocks());
                         }
                     } else if(obj.getClass()==Player.class) {
                         Game.setPlayer((Player)obj);

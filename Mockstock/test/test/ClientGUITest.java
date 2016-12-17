@@ -10,5 +10,7 @@ package test;
  * @author Rajat
  */
 public class ClientGUITest {
-    
+    public static void main(String[] args) {
+        client.GUI.buildGUI();
+    }
 }
