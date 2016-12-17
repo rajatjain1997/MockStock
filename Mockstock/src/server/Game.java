@@ -63,8 +63,9 @@ public class Game {
     }
 
     public static Player getPlayer(int teamNo) throws PlayerLockedException {
-        if(!playerLocks.get(teamNo-1)) {
+        if(teamNo<=Player.getNumberOfTeams()&&!playerLocks.get(teamNo-1)) {
             playerLocks.set(teamNo-1, true);
+            System.out.println("Locked"+players.get(teamNo-1));
             return players.get(teamNo-1);
         }
         throw new PlayerLockedException("The player is being accessed by another client");
@@ -73,6 +74,7 @@ public class Game {
     public static void setPlayer(Player player) {
         players.set(player.getTeamID()-1, player);
         playerLocks.set(player.getTeamID()-1, false);
+        System.out.println("Unlocked"+player);
         GUI.inform();
     }
 

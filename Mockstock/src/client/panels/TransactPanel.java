@@ -54,6 +54,9 @@ public class TransactPanel extends JPanel {
                         System.out.println(p);
                         infoLabel.setText("Transaction Successful");
                         infoLabel.setForeground(Color.green);
+                        playerID.setText("");
+                        qty.setText("");
+                        stock.setSelectedIndex(0);
                     } catch (NumberFormatException | PlayerLockedException ex) {
                         infoLabel.setText("Transaction Unsuccessful");
                         infoLabel.setForeground(Color.red);
@@ -73,6 +76,9 @@ public class TransactPanel extends JPanel {
                         System.out.println(p);
                         infoLabel.setText("Transaction Successful");
                         infoLabel.setForeground(Color.green);
+                        playerID.setText("");
+                        qty.setText("");
+                        stock.setSelectedIndex(0);
                     } catch (NumberFormatException | PlayerLockedException ex) {
                         infoLabel.setText("Transaction Unsuccessful");
                         infoLabel.setForeground(Color.red);
