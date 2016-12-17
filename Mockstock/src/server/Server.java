@@ -93,6 +93,7 @@ public class Server {
                 }
             } catch(IOException | ClassNotFoundException | NumberFormatException e) {
                 e.printStackTrace();
+                Game.setNoOfBrokers(Game.getNoOfBrokers()-1);
             }
         }
         

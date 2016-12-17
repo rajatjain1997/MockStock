@@ -43,13 +43,20 @@ public class RegisterPanel extends JPanel{
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int teamNo = Client.getInstance().registerPlayer(playerName.getText());
-                nameLabel.setText(playerName.getText());
-                teamLabel.setText(Integer.toString(teamNo));
-                confirmLabel.setText("Registration Successful!");
-                confirmLabel.setForeground(Color.green);
-                playerName.setText("");
-                RegisterPanel.this.repaint();
+                if(!playerName.getText().trim().equals("")) {
+                    int teamNo = Client.getInstance().registerPlayer(playerName.getText());
+                    nameLabel.setText(playerName.getText());
+                    teamLabel.setText(Integer.toString(teamNo));
+                    confirmLabel.setText("Registration Successful!");
+                    confirmLabel.setForeground(Color.green);
+                    playerName.setText("");
+                    RegisterPanel.this.repaint();
+                } else {
+                    confirmLabel.setText("Registration Unsuccessful!");
+                    confirmLabel.setForeground(Color.red);
+                    teamLabel.setText(" ");
+                    nameLabel.setText(" ");
+                }
             }
             
         });

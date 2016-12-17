@@ -51,9 +51,12 @@ public class GUI {
     
     private static void initializeControlButtons() {
         controlButtons.add(new JToggleButton("Connect",true));
+        controlButtons.get(0).addActionListener(new ConnectListener());
         controlButtons.add(new JToggleButton("Register"));
         controlButtons.get(1).addActionListener(new RegisterListener());
+        controlButtons.get(1).setEnabled(false);
         controlButtons.add(new JToggleButton("Transact"));
         controlButtons.get(2).addActionListener(new TransactListener());
+        controlButtons.get(2).setEnabled(false);
     }
 }

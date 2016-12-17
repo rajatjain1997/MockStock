@@ -54,6 +54,7 @@ public class GUI {
         leaderboardDisplay.setMaximumSize(new Dimension(500,1000000));
         JButton serializeButton = new JButton("Serialize");
         serializeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        serializeButton.addActionListener(new SerializeListener());
         //Leaderboard GUI ends
         //Menubar GUI starts here
         JMenuBar menuBar = new JMenuBar();
@@ -65,6 +66,11 @@ public class GUI {
         
         fileMenu.addActionListener(new FileListener());
         statsMenu.addActionListener(new StatsListener());
+        //Credits.
+        JLabel creditsLabel1 = new JLabel("Made by - ");
+        JLabel creditsLabel2 = new JLabel("Rajat Jain");
+        creditsLabel1.setAlignmentX(Container.CENTER_ALIGNMENT);
+        creditsLabel2.setAlignmentX(Container.CENTER_ALIGNMENT);
         //Just adding stuff now
         theFrame.setJMenuBar(menuBar);
         theFrame.add(roundNo);
@@ -72,6 +78,8 @@ public class GUI {
         theFrame.add(leaderboard);
         theFrame.add(leaderboardDisplay);
         theFrame.add(serializeButton);
+        theFrame.add(creditsLabel1);
+        theFrame.add(creditsLabel2);
         //Adding stuff is done
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         theFrame.setSize(550, 500);

@@ -39,6 +39,8 @@ public class ConnectionPanel extends JPanel {
                     Client.initializeConnection(serverIP.getText());
                     Client.getInstance().readStocks();
                     GUI.getControlButtons().get(0).setEnabled(false);
+                    GUI.getControlButtons().get(1).setEnabled(true);
+                    GUI.getControlButtons().get(2).setEnabled(true);
                     GUI.getControlButtons().get(1).setSelected(true);
                     GUI.setDisplayPanel(new RegisterPanel());
                 } catch(Exception ex) {
