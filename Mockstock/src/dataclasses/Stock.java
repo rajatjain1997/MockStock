@@ -19,4 +19,11 @@ public class Stock implements Serializable{
 		this.name=name;
 		this.prices=(ArrayList<Long>)prices.clone();
 	}
+
+        @Override
+        public String toString() {
+            return name;
+        }
+        
+        
 }

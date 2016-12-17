@@ -19,7 +19,7 @@ public class Game {
     private static final ArrayList<Player> players = new ArrayList<>();
     private static final ArrayList<Stock> stocks = new ArrayList<>();
     private static final ArrayList<Boolean> playerLocks = new ArrayList<>();
-    private static long initialBalance;
+    private static long initialBalance=100000;
     private static int noOfBrokers=0;
     private static int currentRound=1;
     

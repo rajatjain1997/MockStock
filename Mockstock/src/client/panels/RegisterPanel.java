@@ -48,6 +48,7 @@ public class RegisterPanel extends JPanel{
                 teamLabel.setText(Integer.toString(teamNo));
                 confirmLabel.setText("Registration Successful!");
                 confirmLabel.setForeground(Color.green);
+                playerName.setText("");
                 RegisterPanel.this.repaint();
             }
             

@@ -6,6 +6,7 @@
 package client;
 
 
+import client.listeners.*;
 import client.panels.*;
 import javax.swing.*;
 import java.awt.*;
@@ -51,6 +52,8 @@ public class GUI {
     private static void initializeControlButtons() {
         controlButtons.add(new JToggleButton("Connect",true));
         controlButtons.add(new JToggleButton("Register"));
+        controlButtons.get(1).addActionListener(new RegisterListener());
         controlButtons.add(new JToggleButton("Transact"));
+        controlButtons.get(2).addActionListener(new TransactListener());
     }
 }

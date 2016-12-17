@@ -65,4 +65,11 @@ public class Player implements Serializable{
 			portfolio.add(new Commodity(i));
 		}
         }
+
+    @Override
+    public String toString() {
+        return "Player{" + "name=" + name + ", currentBalance=" + currentBalance + '}';
+    }
+        
+        
 }

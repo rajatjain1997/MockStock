@@ -21,19 +21,22 @@ public class StatsListener implements ActionListener{
     private JLabel noOfStocks;
     private JLabel noOfPlayers;
     private JLabel noOfBrokers;
+    private JTextField startBalance;
     
     @Override
     public void actionPerformed(ActionEvent e) {
         JDialog statsDialog = new JDialog(GUI.getTheFrame(),"Stats!");
-        JPanel statsPanel = new JPanel(new GridLayout(3,2));
+        JPanel statsPanel = new JPanel(new GridLayout(4,2));
         JPanel controlPanel = new JPanel();
         JLabel noOfBrokersLabel = new JLabel("No. of Brokers: ");
         JLabel noOfPlayersLabel = new JLabel("No. of Players: ");
         JLabel noOfStocksLabel = new JLabel("No. of Stocks: ");
         JLabel titleLabel = new JLabel("Server Statistics");
+        JLabel balanceLabel = new JLabel("Start Balance: ");
         noOfBrokers = new JLabel(Integer.toString(Game.getNoOfBrokers()));
         noOfPlayers = new JLabel(Integer.toString(Player.getNumberOfTeams()));
         noOfStocks = new JLabel(Integer.toString(Game.getStocks().size()));
+        startBalance = new JTextField(Long.toString(Game.getInitialBalance()));
         JButton exitButton = new JButton("Exit");
         JButton refreshButton = new JButton("Refresh");
         statsPanel.add(noOfBrokersLabel);
@@ -42,12 +45,15 @@ public class StatsListener implements ActionListener{
         statsPanel.add(noOfPlayers);
         statsPanel.add(noOfStocksLabel);
         statsPanel.add(noOfStocks);
+        statsPanel.add(balanceLabel);
+        statsPanel.add(startBalance);
         controlPanel.add(refreshButton);
         controlPanel.add(exitButton);
         
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+               Game.setInitialBalance(Long.parseLong(startBalance.getText()));
                statsDialog.setVisible(false);
             }
         });
@@ -68,7 +74,7 @@ public class StatsListener implements ActionListener{
         statsDialog.add(statsPanel);
         controlPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         statsDialog.add(controlPanel);
-        statsDialog.setSize(250,150);
+        statsDialog.setSize(250,200);
         statsDialog.setVisible(true);
     }
     

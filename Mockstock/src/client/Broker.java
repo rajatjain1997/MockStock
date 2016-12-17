@@ -31,7 +31,7 @@ public class Broker {
         try {
             Commodity c = player.getCommodity(stock.getName());
             long currentBalance = player.getCurrentBalance();
-            player.setCurrentBalance(currentBalance-c.getStock().getPrice(roundNo));
+            player.setCurrentBalance(currentBalance-c.getStock().getPrice(roundNo)*quantity);
             c.addQuantity(quantity);
         } catch(CommodityNotFoundException | IllegalBuyingException e) {
             System.out.println(e.getMessage());
@@ -42,8 +42,8 @@ public class Broker {
         try {
             Commodity c = player.getCommodity(stock.getName());
             long currentBalance = player.getCurrentBalance();
-            player.setCurrentBalance(currentBalance+c.getStock().getPrice(roundNo));
             c.removeQuantity(quantity);
+            player.setCurrentBalance(currentBalance+c.getStock().getPrice(roundNo)*quantity);
         } catch(CommodityNotFoundException | IllegalSellingException | IllegalBuyingException e) {
             System.out.println(e.getMessage());
         }

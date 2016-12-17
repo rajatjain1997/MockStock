@@ -121,15 +121,7 @@ public class Client {
     }
     
     public static void main(String args[]) {
-        client.registerPlayer("Rajat");
-        Player p = null;
-        try {
-            p = client.readPlayer(1);
-        } catch (PlayerLockedException ex) {
-            System.out.println(ex.getMessage());
-        }
-        client.writePlayer(p);
-        System.out.println(client.readRoundNo());
+        GUI.buildGUI();
     }
     
     public class RemoteReader implements Runnable {
