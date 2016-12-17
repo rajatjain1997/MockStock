@@ -24,6 +24,10 @@ public class GUI {
 		return fileOpen.getSelectedFile();
     }
     
+    public static void inform() {
+        leaderboardDisplay.setText(Leaderboard.toPrint());
+    }
+    
     public static void buildGUI() {
         theFrame.setLayout(new BoxLayout(theFrame.getContentPane(),BoxLayout.Y_AXIS));
         //RoundNumber GUI starts here

@@ -58,6 +58,7 @@ public class Game {
 
     public static Player getPlayer(int teamNo) throws PlayerLockedException {
         if(!playerLocks.get(teamNo-1)) {
+            playerLocks.set(teamNo-1, true);
             return players.get(teamNo-1);
         }
         throw new PlayerLockedException("The player is being accessed by another client");
@@ -66,6 +67,7 @@ public class Game {
     public static void setPlayer(Player player) {
         players.set(player.getTeamID()-1, player);
         playerLocks.set(player.getTeamID()-1, false);
+        GUI.inform();
     }
 
     public static ArrayList<Stock> getStocks() {
@@ -94,6 +96,10 @@ public class Game {
 
     public static void setCurrentRound(int currentRound) {
         Game.currentRound = currentRound;
+    }
+
+    public static ArrayList<Player> getPlayers() {
+        return (ArrayList<Player>)players.clone();
     }
     
     

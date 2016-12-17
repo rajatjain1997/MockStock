@@ -21,6 +21,7 @@ public class SubButtonListener implements ActionListener{
         if(GUI.getCurrentRound()>1) {
             GUI.setCurrentRound(GUI.getCurrentRound()-1);
             Game.setCurrentRound(GUI.getCurrentRound()-1);
+            GUI.inform();
         }
     }
     
