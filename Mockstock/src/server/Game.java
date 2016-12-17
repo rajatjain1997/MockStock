@@ -40,16 +40,22 @@ public class Game {
         try {
             BufferedReader in = new BufferedReader(new FileReader(file));
             while((line=in.readLine())!=null) {
+                System.out.println(line);
                 st = new StringTokenizer(line,",");
                 prices = new ArrayList<>();
                 name = st.nextToken();
-                char[] replacer = {(char)65279};
-                name = name.replace(new String(replacer), "");
+                char[] replacer = name.toCharArray();
+                name="";
+                for(char i:replacer) {
+                    if(('a'<=i&&i<='z')||('A'<=i&&i<='Z')||i==' '||('0'<=i&&i<='9')||i==',') {
+                        name+=i;
+                    }
+                }
                 while(st.hasMoreTokens()) {
                     prices.add(Long.parseLong(st.nextToken()));
                 }
                 stocks.add(new Stock(name, prices));
-                System.out.println("Read" + name);
+                System.out.println("Read " + name + prices);
             }
         } catch(IOException e) {
             e.printStackTrace();
@@ -96,6 +102,7 @@ public class Game {
 
     public static void setCurrentRound(int currentRound) {
         Game.currentRound = currentRound;
+        System.out.println(currentRound);
     }
 
     public static ArrayList<Player> getPlayers() {

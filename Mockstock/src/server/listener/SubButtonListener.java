@@ -20,7 +20,7 @@ public class SubButtonListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(GUI.getCurrentRound()>1) {
             GUI.setCurrentRound(GUI.getCurrentRound()-1);
-            Game.setCurrentRound(GUI.getCurrentRound()-1);
+            Game.setCurrentRound(GUI.getCurrentRound());
             GUI.inform();
         }
     }

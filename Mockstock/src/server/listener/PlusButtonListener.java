@@ -18,7 +18,7 @@ public class PlusButtonListener implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         GUI.setCurrentRound(GUI.getCurrentRound()+1);
-        Game.setCurrentRound(GUI.getCurrentRound()+1);
+        Game.setCurrentRound(GUI.getCurrentRound());
         GUI.inform();
     }
     
