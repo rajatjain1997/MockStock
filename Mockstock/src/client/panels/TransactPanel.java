@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author Rajat
  */
-public class TransactPanel extends JPanel {
+public class TransactPanel extends AbstractFocusablePanel {
         public TransactPanel() {
             super();
             JLabel infoLabel = new JLabel(" ");
@@ -26,6 +26,7 @@ public class TransactPanel extends JPanel {
             JLabel playerIDLabel = new JLabel("Player ID: ");
             JLabel quantityLabel = new JLabel("Quantity: ");
             JComboBox stock = new JComboBox(new Vector<Stock>(Broker.getStocks()));
+            this.setFocusRequester(stock);
             JTextField playerID = new JTextField(20);
             JTextField qty = new JTextField(5);
             JButton sell = new JButton("Sell");
@@ -57,9 +58,14 @@ public class TransactPanel extends JPanel {
                         playerID.setText("");
                         qty.setText("");
                         stock.setSelectedIndex(0);
+                        TransactPanel.this.repaint();
                     } catch (NumberFormatException | PlayerLockedException ex) {
                         infoLabel.setText("Transaction Unsuccessful");
                         infoLabel.setForeground(Color.red);
+                        playerID.setText("");
+                        qty.setText("");
+                        stock.setSelectedIndex(0);
+                        TransactPanel.this.repaint();
                     } 
                 }
                 
@@ -79,9 +85,14 @@ public class TransactPanel extends JPanel {
                         playerID.setText("");
                         qty.setText("");
                         stock.setSelectedIndex(0);
+                        TransactPanel.this.repaint();
                     } catch (NumberFormatException | PlayerLockedException ex) {
                         infoLabel.setText("Transaction Unsuccessful");
                         infoLabel.setForeground(Color.red);
+                        playerID.setText("");
+                        qty.setText("");
+                        stock.setSelectedIndex(0);
+                        TransactPanel.this.repaint();
                     } 
                 }
                 

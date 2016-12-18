@@ -67,10 +67,8 @@ public class GUI {
         fileMenu.addActionListener(new FileListener());
         statsMenu.addActionListener(new StatsListener());
         //Credits.
-        JLabel creditsLabel1 = new JLabel("Made by - ");
-        JLabel creditsLabel2 = new JLabel("Rajat Jain");
+        JLabel creditsLabel1 = new JLabel("Developed by - Rajat Jain");
         creditsLabel1.setAlignmentX(Container.CENTER_ALIGNMENT);
-        creditsLabel2.setAlignmentX(Container.CENTER_ALIGNMENT);
         //Just adding stuff now
         theFrame.setJMenuBar(menuBar);
         theFrame.add(roundNo);
@@ -79,7 +77,6 @@ public class GUI {
         theFrame.add(leaderboardDisplay);
         theFrame.add(serializeButton);
         theFrame.add(creditsLabel1);
-        theFrame.add(creditsLabel2);
         //Adding stuff is done
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         theFrame.setSize(550, 500);

@@ -14,7 +14,8 @@ import javax.swing.*;
  *
  * @author Rajat
  */
-public class ConnectionPanel extends JPanel {
+public class ConnectionPanel extends AbstractFocusablePanel {
+    
     
     public ConnectionPanel() {
         super();
@@ -23,7 +24,7 @@ public class ConnectionPanel extends JPanel {
         infoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         JLabel label = new JLabel("Server IP:");
         JTextField serverIP = new JTextField(20);
-        serverIP.requestFocus();
+        this.setFocusRequester(serverIP);
         JButton connect = new JButton("Connect!");
         connect.setAlignmentX(Component.CENTER_ALIGNMENT);
         JPanel infoPanel = new JPanel();
@@ -50,5 +51,35 @@ public class ConnectionPanel extends JPanel {
                 }
             }  
         });
+        serverIP.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyChar()=='\n') {
+                    try {
+                    Client.initializeConnection(serverIP.getText());
+                    Client.getInstance().readStocks();
+                    GUI.getControlButtons().get(0).setEnabled(false);
+                    GUI.getControlButtons().get(1).setEnabled(true);
+                    GUI.getControlButtons().get(2).setEnabled(true);
+                    GUI.getControlButtons().get(1).setSelected(true);
+                    GUI.setDisplayPanel(new RegisterPanel());
+                    } catch(Exception ex) {
+                    infoLabel.setText("Connection Unsuccessful, try again");
+                    infoLabel.setForeground(Color.red);
+                    ConnectionPanel.this.repaint();
+                }
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+            
+        });
     }
+    
 }

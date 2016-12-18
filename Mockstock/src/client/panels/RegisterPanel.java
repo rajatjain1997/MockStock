@@ -14,7 +14,7 @@ import client.*;
  *
  * @author Rajat
  */
-public class RegisterPanel extends JPanel{
+public class RegisterPanel extends AbstractFocusablePanel{
     
     JLabel nameLabel = new JLabel(" ");
     JLabel teamLabel = new JLabel(" ");
@@ -25,6 +25,7 @@ public class RegisterPanel extends JPanel{
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         JLabel registerLabel = new JLabel("Player Name: ");
         JTextField playerName = new JTextField(20);
+        this.setFocusRequester(playerName);
         JButton registerButton = new JButton("Register!");
         JPanel infoPanel = new JPanel();
         infoPanel.add(registerLabel);
@@ -60,6 +61,36 @@ public class RegisterPanel extends JPanel{
             }
             
         });
+        
+        playerName.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyChar()=='\n') {
+                    if(!playerName.getText().trim().equals("")) {
+                        int teamNo = Client.getInstance().registerPlayer(playerName.getText());
+                        nameLabel.setText(playerName.getText());
+                        teamLabel.setText(Integer.toString(teamNo));
+                        confirmLabel.setText("Registration Successful!");
+                        confirmLabel.setForeground(Color.green);
+                        playerName.setText("");
+                        RegisterPanel.this.repaint();
+                    } else {
+                        confirmLabel.setText("Registration Unsuccessful!");
+                        confirmLabel.setForeground(Color.red);
+                        teamLabel.setText(" ");
+                        nameLabel.setText(" ");
+                    }
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+            
+        });
     }
-    
 }
