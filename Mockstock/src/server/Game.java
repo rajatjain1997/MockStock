@@ -30,6 +30,10 @@ public class Game {
         return Player.getNumberOfTeams();
     }
     
+    /**Reads a .csv file and loads the stocks in the program.
+     * 
+     */
+    
     public static void readStocks() {
         stocks.removeAll(stocks);
         File file = GUI.getFile();

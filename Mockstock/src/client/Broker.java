@@ -26,7 +26,13 @@ public class Broker {
     }
     
     
-
+    /**Buys a particular amount of a stock for a player, and accordingly deducts balance and increases quantity.
+     * 
+     * @param player
+     * @param stock
+     * @param quantity
+     * @param roundNo 
+     */
     public static void buyStock(Player player, Stock stock, int quantity, int roundNo) {
         try {
             Commodity c = player.getCommodity(stock.getName());
@@ -38,6 +44,13 @@ public class Broker {
         }
     }
     
+    /**Sells a particular amount of a stock for a player, and accordingly increases balance and deducts quantity.
+     * 
+     * @param player
+     * @param stock
+     * @param quantity
+     * @param roundNo 
+     */
     public static void sellStock(Player player, Stock stock, int quantity, int roundNo) {
         try {
             Commodity c = player.getCommodity(stock.getName());
