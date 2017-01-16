@@ -4,8 +4,6 @@ import java.util.*;
 import java.io.*;
 import exceptions.CommodityNotFoundException;
 import exceptions.IllegalBuyingException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import server.Game;
 
 public class Player implements Serializable, Comparable<Player>{
@@ -70,26 +68,24 @@ public class Player implements Serializable, Comparable<Player>{
 
     @Override
     public String toString() {
-        return " " + name + ": Current Balance: " + currentBalance;
+        return " " + name + ", Team No. - "+this.teamID+", Current Balance - " + currentBalance+", Portfolio Value - " + getPortfolioValue(this);
     }
 
     @Override
     public int compareTo(Player o) {
-        long val1,val2;
-        val1=currentBalance;
-        val2=o.getCurrentBalance();
-        for(Commodity i: this.portfolio) {
-            val1+=i.getStock().getPrice(Game.getCurrentRound())*i.getQuantity();
-        }
+        return (int)(getPortfolioValue(o)-getPortfolioValue(this));
+    }
+    
+    private static long getPortfolioValue(Player o) {
+        long val = o.getCurrentBalance();
         for(Stock j:Game.getStocks()) {
             try {
-            val2+=j.getPrice(Game.getCurrentRound())*o.getCommodity(j.getName()).getQuantity();
+            val+=j.getPrice(Game.getCurrentRound())*o.getCommodity(j.getName()).getQuantity();
             } catch (CommodityNotFoundException ex) {
                 ex.printStackTrace();
             } 
         }
-        return (int)(val2-val1);
+        return val;
     }
-        
         
 }
